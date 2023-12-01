@@ -14,12 +14,14 @@ type PasswordRequirements struct {
 	Special int
 }
 
+var userInput InputGetter = &RealInputGetter{}
+
 func GetUserInput() (PasswordRequirements, error) {
 	p := PasswordRequirements{}
 	reqCount := 0
 
 	fmt.Print("How long should the password be? ")
-	str, err := GetInput()
+	str, err := userInput.GetInput()
 	if err != nil {
 		return PasswordRequirements{}, err
 	}
@@ -29,7 +31,7 @@ func GetUserInput() (PasswordRequirements, error) {
 	}
 
 	fmt.Print("Minimum number of uppercase letters? ")
-	str, err = GetInput()
+	str, err = userInput.GetInput()
 	if err != nil {
 		return PasswordRequirements{}, err
 	}
@@ -43,7 +45,7 @@ func GetUserInput() (PasswordRequirements, error) {
 	}
 
 	fmt.Print("Minimum number of lowercase letters? ")
-	str, err = GetInput()
+	str, err = userInput.GetInput()
 	if err != nil {
 		return PasswordRequirements{}, err
 	}
@@ -57,7 +59,7 @@ func GetUserInput() (PasswordRequirements, error) {
 	}
 
 	fmt.Print("Minimum number of numbers? ")
-	str, err = GetInput()
+	str, err = userInput.GetInput()
 	if err != nil {
 		return PasswordRequirements{}, err
 	}
@@ -71,7 +73,7 @@ func GetUserInput() (PasswordRequirements, error) {
 	}
 
 	fmt.Print("Minimum number of special characters? ")
-	str, err = GetInput()
+	str, err = userInput.GetInput()
 	if err != nil {
 		return PasswordRequirements{}, err
 	}

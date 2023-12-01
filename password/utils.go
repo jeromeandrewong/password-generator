@@ -8,7 +8,13 @@ import (
 	"os"
 )
 
-func GetInput() (string, error) {
+type InputGetter interface {
+	GetInput() (string, error)
+}
+
+type RealInputGetter struct{}
+
+func (r *RealInputGetter) GetInput() (string, error) {
 	scanner := bufio.NewScanner(os.Stdin)
 	scanner.Scan()
 	err := scanner.Err()

@@ -1,6 +1,7 @@
 package password
 
 import (
+	"errors"
 	"fmt"
 	"strings"
 )
@@ -14,17 +15,21 @@ var (
 )
 
 func GeneratePassword() {
-	password, err := CreatePassword()
+	passReq, err := GetUserInput()
+	if err != nil {
+		fmt.Println("Error:", err)
+	}
+	password, err := CreatePassword(passReq)
 	if err != nil {
 		fmt.Println("Error:", err)
 	}
 	fmt.Println(password)
 }
 
-func CreatePassword() (string, error) {
-	passReq, err := GetUserInput()
-	if err != nil {
-		return "", err
+func CreatePassword(passReq PasswordRequirements) (string, error) {
+
+	if passReq.Length < passReq.Lower+passReq.Upper+passReq.Numbers+passReq.Special {
+		return "", errors.New("password requirements exceed password length")
 	}
 
 	var password strings.Builder

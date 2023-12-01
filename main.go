@@ -13,17 +13,17 @@ import (
 )
 
 var (
-	lower = "abcdefghijklmnopqrstuvwxyz"
-	upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-	numbers = "0123456789"
-	special = "!@#$%^&*()_+={}[]|<>/?~`"
+	lower    = "abcdefghijklmnopqrstuvwxyz"
+	upper    = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	numbers  = "0123456789"
+	special  = "!@#$%^&*()_+={}[]|<>/?~`"
 	allChars = lower + upper + numbers + special
 )
 
 type PasswordRequirements struct {
-	Length int
-	Lower int
-	Upper int
+	Length  int
+	Lower   int
+	Upper   int
 	Numbers int
 	Special int
 }
@@ -37,7 +37,7 @@ func main() {
 
 }
 
-func createPassword() (string, error){
+func createPassword() (string, error) {
 	passReq, err := getUserInput()
 	if err != nil {
 		return "", err
@@ -95,7 +95,7 @@ func createPassword() (string, error){
 	return pass, nil
 }
 
-func randomInt64(len int) (int64, error){
+func randomInt64(len int) (int64, error) {
 	n, err := cRand.Int(cRand.Reader, big.NewInt(int64(len)))
 	return n.Int64(), err
 }
@@ -121,7 +121,7 @@ func getUserInput() (PasswordRequirements, error) {
 	}
 	p.Length, err = strconv.Atoi(str)
 	if err != nil {
-		return PasswordRequirements{}, errors.New("Please enter a valid number")
+		return PasswordRequirements{}, errors.New("please enter a valid number")
 	}
 
 	fmt.Print("how many uppercase letters? ")
@@ -131,11 +131,11 @@ func getUserInput() (PasswordRequirements, error) {
 	}
 	p.Upper, err = strconv.Atoi(str)
 	if err != nil {
-		return PasswordRequirements{}, errors.New("Please enter a valid number")
+		return PasswordRequirements{}, errors.New("please enter a valid number")
 	}
 	reqCount += p.Upper
 	if reqCount > p.Length {
-		return PasswordRequirements{}, errors.New("Exceeded password length")
+		return PasswordRequirements{}, errors.New("please enter a valid number")
 	}
 
 	fmt.Print("how many lowercase letters? ")
@@ -145,11 +145,11 @@ func getUserInput() (PasswordRequirements, error) {
 	}
 	p.Lower, err = strconv.Atoi(str)
 	if err != nil {
-		return PasswordRequirements{}, errors.New("Please enter a valid number")
+		return PasswordRequirements{}, errors.New("please enter a valid number")
 	}
 	reqCount += p.Lower
 	if reqCount > p.Length {
-		return PasswordRequirements{}, errors.New("Exceeded password length")
+		return PasswordRequirements{}, errors.New("exceeded password length")
 	}
 
 	fmt.Print("how many numbers should there be? ")
@@ -159,11 +159,11 @@ func getUserInput() (PasswordRequirements, error) {
 	}
 	p.Numbers, err = strconv.Atoi(str)
 	if err != nil {
-		return PasswordRequirements{}, errors.New("Please enter a valid number")
+		return PasswordRequirements{}, errors.New("please enter a valid number")
 	}
 	reqCount += p.Numbers
 	if reqCount > p.Length {
-		return PasswordRequirements{}, errors.New("Exceeded password length")
+		return PasswordRequirements{}, errors.New("exceeded password length")
 	}
 
 	fmt.Print("how many special characters should there be? ")
@@ -173,17 +173,17 @@ func getUserInput() (PasswordRequirements, error) {
 	}
 	p.Special, err = strconv.Atoi(str)
 	if err != nil {
-		return PasswordRequirements{}, errors.New("Please enter a valid number")
+		return PasswordRequirements{}, errors.New("please enter a valid number")
 	}
 	reqCount += p.Special
 	if reqCount > p.Length {
-		return PasswordRequirements{}, errors.New("Exceeded password length")
+		return PasswordRequirements{}, errors.New("exceeded password length")
 	}
 
 	return p, nil
 }
 
-func getInput() (string, error){
+func getInput() (string, error) {
 	scanner := bufio.NewScanner(os.Stdin)
 	scanner.Scan()
 	err := scanner.Err()
